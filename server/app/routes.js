@@ -32,7 +32,7 @@ module.exports = function(app, passport, game) {
       user.local.char.name = req.body.char.name;
       user.local.char.race = req.body.char.race;
       user.local.char.class = req.body.char.class;
-      user.local.char.lvl = 35;
+      user.local.char.lvl = 0;
       user.local.char.xp = 0;
       user.save(function(err){
         res.redirect("/profile")

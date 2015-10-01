@@ -26,6 +26,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/static', express.static('public'));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
@@ -38,7 +39,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // Random Vars
 var game = {
-  name: "RPG Test"
+  name: "Old Bones"
 }
 
 
