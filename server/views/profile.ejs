@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title><%= game.name %></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <% if (user.local.email) { %>
+                  <p>
+                      <strong>id</strong>: <%= user._id %><br>
+                      <strong>email</strong>: <%= user.local.email %><br>
+                  </p>
+                  <!--<a href="/testfunc" class="btn btn-default">Test FUnction</a>-->
+                  
+                  <% if (user.local.char.name == undefined) { %>
+                    <p>
+                      You do not have a character, create one now!<br>
+                      <a href="/newchar" class="btn btn-default">Create new character</a>
+                    </p>
+                  <% } else { %>
+                    <p>
+                      <h1>Charater details:</h1>
+                      <strong>Name</strong>: <%= user.local.char.name %><br>
+                      <strong>Race</strong>: <%= user.local.char.race %><br>
+                      <strong>Class</strong>: <%= user.local.char.class %><br>
+                      <strong>Character Level</strong>: <%= user.local.char.lvl %><br>
+                      <strong>Character Exp</strong>: <%= user.local.char.xp %>
+                      
+                    </p>
+                  
+                    <p>
+                      <a href="/destroychar" class="btn btn-default">Destory Charater</a>
+                    </p>
+                  <% } %>
+                  
+                  
+                   
+                  <a href="/unlink/local" class="btn btn-default">Reset account</a>
+                <% } else { %>
+                  <a href="/connect/local" class="btn btn-default">Rebuild account</a> 
+                    
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    
+    </div>
+
+</div>
+</body>
+</html>

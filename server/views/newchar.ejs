@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <title><%= game.name %></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Character creation</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+      <form action="/newchar" method="post">
+        <div class="form-group">
+            <label>Character name</label>
+            <input type="text" class="form-control" name="char[name]">
+        </div>
+        <div class="form-group">
+            <label>Race</label>
+            <select class="form-control" name="char[race]">
+              <option value="Human">Human</option>
+              <option value="Orc">Orc</option>
+            </select>
+            <label>Class</label>
+            <select class="form-control" name="char[class]">
+              <option value="Mage">Mage</option>
+              <option value="Warrior">Warrior</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+    </form>
+    </div>
+
+</div>
+</body>
+</html>
