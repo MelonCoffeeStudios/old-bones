@@ -1,17 +1,29 @@
 module.exports = function(app, passport, game) {
+    var charJS = require("./char");
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+        if(req.user){
+            res.render('profile.ejs', {
+                user    :   req.user,
+                game    :   game
+            })
+        }else{
+            res.render('index.ejs', {
+                user    :   req.user,
+                game    :   game
+            });
+        }
     });
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
-            user : req.user,
-            game : game
-        });
+        res.redirect("/")
+        // res.render('profile.ejs', {
+        //     user : req.user,
+        //     game : game
+        // });
     });
 
     // LOGOUT ==============================
@@ -28,15 +40,7 @@ module.exports = function(app, passport, game) {
     });
     
     app.post("/newchar", isLoggedIn, function(req, res){
-      var user = req.user
-      user.local.char.name = req.body.char.name;
-      user.local.char.race = req.body.char.race;
-      user.local.char.class = req.body.char.class;
-      user.local.char.lvl = 0;
-      user.local.char.xp = 0;
-      user.save(function(err){
-        res.redirect("/profile")
-      })
+        charJS.resetChar(req, res)
     });
     
     app.get("/destroychar", isLoggedIn, function(req, res){
@@ -48,7 +52,10 @@ module.exports = function(app, passport, game) {
     })
     
     app.get("/game", isLoggedIn, function(req, res) {
-        res.render("game.ejs")
+        res.render("game.ejs", {
+            user: req.user,
+            game: game
+        })
     })
 
 // =============================================================================
