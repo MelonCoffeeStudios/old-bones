@@ -13,8 +13,12 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var ObjectID     = require('mongodb').ObjectID;
+var mongo        = require("mongodb").MongoClient;
 
 var configDB = require('./config/database.js');
+
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -44,8 +48,17 @@ var game = {
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport, game); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, game, mongo, ObjectID); // load our routes and pass in our app and fully configured passport
+
 
 // launch ======================================================================
-app.listen(port);
+var serv =app.listen(port);
+
+var io = require("socket.io").listen(serv)
+
+require('./app/game.js')(app, passport, game, io, mongo, ObjectID)
+
+
+
+
 console.log('Connect to: http://old-bones-meloncoffeestudios.c9.io:' + port);

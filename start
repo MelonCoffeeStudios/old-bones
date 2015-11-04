@@ -1,3 +1,4 @@
+rm -rf data/mongod.lock
 ./mongod &
 cd server
 nodemon server.js

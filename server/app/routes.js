@@ -1,4 +1,4 @@
-module.exports = function(app, passport, game) {
+module.exports = function(app, passport, game, mongo, ObjectID) {
     var charJS = require("./char");
 // normal routes ===============================================================
 
@@ -57,6 +57,8 @@ module.exports = function(app, passport, game) {
             game: game
         })
     })
+    
+
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -131,3 +133,6 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/');
 }
+
+
+
